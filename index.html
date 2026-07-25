@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miracle Edet Okon — Designer & AI Creator</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --white: #ffffff;
+    --bg: #f7f9fc;
+    --surface: #ffffff;
+    --surface2: #f0f4f8;
+    --cyan: #00BCD4;
+    --cyan-dark: #0097A7;
+    --magenta: #E91E8C;
+    --magenta-light: rgba(233,30,140,0.08);
+    --cyan-light: rgba(0,188,212,0.08);
+    --text: #0A0A0A;
+    --text2: #444;
+    --muted: #777;
+    --border: #e5e9f0;
+    --border2: #d0d8e8;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 5%;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    color: var(--text); letter-spacing: 0.04em;
+  }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.85rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+  .nav-cta {
+    background: var(--magenta); color: #fff;
+    padding: 0.55rem 1.3rem; border-radius: 5px;
+    font-size: 0.82rem; font-weight: 700;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .nav-cta:hover { background: #c4187a; transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 7rem 5% 4rem;
+    gap: 4rem;
+    background: var(--white);
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; top: -100px; right: -150px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,188,212,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  #hero::after {
+    content: '';
+    position: absolute; bottom: -100px; left: 5%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(233,30,140,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
+    color: var(--cyan); text-transform: uppercase;
+    margin-bottom: 1.4rem;
+    background: var(--cyan-light);
+    padding: 0.4rem 0.9rem; border-radius: 20px;
+    border: 1px solid rgba(0,188,212,0.2);
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.6rem, 5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+  .glitch {
+    position: relative; display: inline-block;
+  }
+  .glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+  }
+  .glitch::before {
+    color: var(--cyan);
+    animation: glitch1 5s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  }
+  .glitch::after {
+    color: var(--magenta);
+    animation: glitch2 5s infinite;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  }
+  @keyframes glitch1 {
+    0%,88%,100%{transform:translate(0);opacity:0}
+    90%{transform:translate(-3px,1px);opacity:0.7}
+    92%{transform:translate(3px,-1px);opacity:0.7}
+    94%{transform:translate(0);opacity:0}
+  }
+  @keyframes glitch2 {
+    0%,88%,100%{transform:translate(0);opacity:0}
+    91%{transform:translate(3px,2px);opacity:0.7}
+    93%{transform:translate(-3px,-2px);opacity:0.7}
+    95%{transform:translate(0);opacity:0}
+  }
+
+  .hero-tagline {
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    color: var(--text2);
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+    max-width: 480px;
+  }
+  .hero-tagline strong { color: var(--cyan); }
+
+  .hero-interrupt {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--magenta);
+    line-height: 1.6;
+    max-width: 440px;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .btn-primary {
+    background: var(--cyan); color: #fff;
+    padding: 0.85rem 2rem; border-radius: 5px;
+    font-weight: 700; font-size: 0.88rem;
+    text-decoration: none; transition: all 0.2s;
+    font-family: 'Syne', sans-serif;
+    box-shadow: 0 4px 15px rgba(0,188,212,0.3);
+  }
+  .btn-primary:hover { background: var(--cyan-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,188,212,0.4); }
+  .btn-outline {
+    border: 2px solid var(--border2);
+    color: var(--text);
+    padding: 0.83rem 2rem; border-radius: 5px;
+    font-weight: 600; font-size: 0.88rem;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--magenta); color: var(--magenta); }
+
+  .hero-socials { display: flex; gap: 0.75rem; align-items: center; }
+  .hero-socials span { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; margin-right: 0.25rem; }
+  .social-icon {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--border2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; color: var(--muted);
+    font-size: 0.72rem; font-weight: 700;
+    transition: all 0.2s;
+    background: var(--white);
+  }
+  .social-icon:hover { border-color: var(--cyan); color: var(--cyan); background: var(--cyan-light); }
+
+  /* Hero Image */
+  .hero-image-wrap {
+    position: relative; z-index: 2;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .hero-img-frame {
+    position: relative;
+    width: min(400px, 90%);
+  }
+  .hero-img-bg {
+    position: absolute; inset: 16px -16px -16px 16px;
+    background: linear-gradient(135deg, var(--cyan), var(--magenta));
+    border-radius: 14px; opacity: 0.15; z-index: 0;
+  }
+  .hero-img-frame img {
+    width: 100%; border-radius: 12px;
+    display: block; position: relative; z-index: 1;
+    border: 3px solid var(--white);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+  .hero-badge {
+    position: absolute; bottom: 2rem; left: -2rem; z-index: 2;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.85rem 1.1rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+  .hero-badge-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.7rem; font-weight: 800;
+    color: var(--cyan); line-height: 1;
+  }
+  .hero-badge-label { font-size: 0.68rem; color: var(--muted); margin-top: 3px; }
+  .hero-badge2 {
+    position: absolute; top: 2rem; right: -2rem; z-index: 2;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.85rem 1.1rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+  .hero-badge2-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem; font-weight: 800;
+    color: var(--magenta); line-height: 1;
+  }
+  .hero-badge2-label { font-size: 0.68rem; color: var(--muted); margin-top: 3px; }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    overflow: hidden;
+    background: var(--text);
+    padding: 0.9rem 0;
+  }
+  .ticker {
+    display: flex; gap: 3rem;
+    animation: ticker 22s linear infinite;
+    white-space: nowrap; width: max-content;
+  }
+  .ticker-item {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.78rem; color: rgba(255,255,255,0.5);
+    font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .ticker-item span { color: var(--cyan); }
+  @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* ── STATS ── */
+  #stats {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-card {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .stat-card:last-child { border-right: none; }
+  .stat-card:hover { background: var(--bg); }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 3.5vw, 3rem);
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+  }
+  .stat-num.cyan { color: var(--cyan); }
+  .stat-num.mag { color: var(--magenta); }
+  .stat-label {
+    font-size: 0.78rem; color: var(--muted);
+    margin-top: 0.5rem; letter-spacing: 0.04em;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 5%; }
+  .section-label {
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.2em; color: var(--cyan);
+    text-transform: uppercase; margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 24px; height: 2px; background: var(--cyan);
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+    font-weight: 800; line-height: 1.15;
+    margin-bottom: 1.2rem; color: var(--text);
+  }
+  .section-title em { color: var(--magenta); font-style: normal; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--bg); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 5rem; align-items: center;
+  }
+  .about-img-wrap { position: relative; }
+  .about-img-bg {
+    position: absolute; inset: 20px -20px -20px 20px;
+    background: linear-gradient(135deg, var(--cyan), var(--magenta));
+    border-radius: 12px; opacity: 0.12;
+  }
+  .about-img-wrap img {
+    width: 100%; border-radius: 10px;
+    position: relative; z-index: 1;
+    border: 3px solid var(--white);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  }
+  .about-tag {
+    position: absolute; top: 1.5rem; left: -1rem; z-index: 2;
+    background: var(--magenta);
+    color: #fff; font-size: 0.68rem; font-weight: 700;
+    padding: 0.4rem 0.8rem; border-radius: 4px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(233,30,140,0.3);
+  }
+  .about-text p {
+    color: var(--text2); line-height: 1.8;
+    margin-bottom: 1.1rem; font-size: 0.93rem;
+  }
+  .about-text p strong { color: var(--text); }
+  .skills-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .skill-tag {
+    border: 1.5px solid var(--border2);
+    padding: 0.4rem 0.9rem; border-radius: 20px;
+    font-size: 0.73rem; color: var(--text2);
+    transition: all 0.2s; background: var(--white);
+    font-weight: 500;
+  }
+  .skill-tag:hover { border-color: var(--cyan); color: var(--cyan); background: var(--cyan-light); }
+
+  /* ── SERVICES ── */
+  #services { background: var(--white); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .service-card {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 2.2rem 1.8rem;
+    transition: all 0.3s;
+  }
+  .service-card:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 8px 30px rgba(0,188,212,0.1);
+    transform: translateY(-3px);
+    background: var(--white);
+  }
+  .service-icon {
+    font-size: 2rem; margin-bottom: 1.1rem;
+    display: block;
+    width: 56px; height: 56px;
+    background: var(--cyan-light);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+  }
+  .service-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    margin-bottom: 0.7rem; color: var(--text);
+  }
+  .service-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.7; }
+
+  /* ── COURSES ── */
+  #courses { background: var(--bg); }
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .course-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s;
+    display: flex; flex-direction: column;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .course-card:hover {
+    border-color: var(--cyan);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,188,212,0.12);
+  }
+  .course-top-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+  }
+  .course-header { padding: 1.5rem 1.5rem 1rem; }
+  .course-tag {
+    font-size: 0.67rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 0.5rem;
+    display: block;
+  }
+  .course-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem; font-weight: 700;
+    line-height: 1.35; color: var(--text);
+  }
+  .course-badge {
+    display: inline-block;
+    background: var(--magenta-light);
+    color: var(--magenta);
+    font-size: 0.63rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.22rem 0.6rem; border-radius: 3px;
+    margin-top: 0.5rem;
+  }
+  .course-body { padding: 1rem 1.5rem; flex: 1; border-top: 1px solid var(--border); }
+  .course-learn-title {
+    font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.75rem;
+  }
+  .course-learn-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .course-learn-list li {
+    font-size: 0.82rem; color: var(--text2);
+    display: flex; gap: 0.5rem; align-items: flex-start; line-height: 1.4;
+  }
+  .course-learn-list li::before {
+    content: '→'; color: var(--cyan);
+    flex-shrink: 0; font-size: 0.75rem; margin-top: 0.05rem;
+  }
+  .course-footer {
+    padding: 1.2rem 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--bg);
+  }
+  .course-price {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem; font-weight: 800; color: var(--text);
+  }
+  .course-price span {
+    font-size: 0.72rem; color: var(--muted);
+    font-family: 'Inter', sans-serif; font-weight: 400;
+    display: block;
+  }
+  .course-btn {
+    background: var(--magenta); color: #fff;
+    padding: 0.6rem 1.2rem; border-radius: 5px;
+    font-size: 0.8rem; font-weight: 700;
+    text-decoration: none; transition: all 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 3px 10px rgba(233,30,140,0.25);
+  }
+  .course-btn:hover { background: #c4187a; transform: translateY(-1px); }
+
+  /* ── CONNECT ── */
+  #connect { background: var(--white); }
+  .connect-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem; margin-top: 3rem;
+  }
+  .connect-card {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1.4rem 1.2rem;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 1rem;
+    transition: all 0.2s;
+  }
+  .connect-card:hover {
+    border-color: var(--cyan);
+    background: var(--cyan-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,188,212,0.1);
+  }
+  .connect-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; font-weight: 800;
+    border: 2px solid currentColor;
+  }
+  .connect-info { min-width: 0; }
+  .connect-platform {
+    font-size: 0.68rem; color: var(--muted);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.2rem;
+  }
+  .connect-handle {
+    font-size: 0.85rem; font-weight: 600; color: var(--text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* ── CTA ── */
+  #cta {
+    background: var(--text);
+    text-align: center; padding: 7rem 5%;
+    position: relative; overflow: hidden;
+  }
+  #cta::before {
+    content: '';
+    position: absolute; top: -50%; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(0,188,212,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800; margin-bottom: 1rem;
+    color: #fff; position: relative; z-index: 1;
+  }
+  .cta-title em { color: var(--cyan); font-style: normal; }
+  .cta-sub {
+    color: rgba(255,255,255,0.55); font-size: 1rem;
+    margin-bottom: 2.5rem; position: relative; z-index: 1;
+  }
+  .cta-btns {
+    display: flex; gap: 1rem; justify-content: center;
+    flex-wrap: wrap; position: relative; z-index: 1;
+  }
+  .btn-wa {
+    background: #25D366; color: #fff;
+    padding: 0.9rem 2rem; border-radius: 5px;
+    font-weight: 700; font-size: 0.9rem;
+    text-decoration: none; transition: all 0.2s;
+    font-family: 'Syne', sans-serif;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+  }
+  .btn-wa:hover { background: #1db954; transform: translateY(-2px); }
+  .btn-white {
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 0.88rem 2rem; border-radius: 5px;
+    font-weight: 600; font-size: 0.9rem;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-white:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050505;
+    border-top: 1px solid #1a1a1a;
+    padding: 2rem 5%;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 0.95rem; color: #fff;
+  }
+  .footer-logo span { color: var(--cyan); }
+  .footer-text { font-size: 0.75rem; color: #555; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-size: 0.75rem; color: #555;
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--cyan); }
+
+  /* ── REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    #hero { grid-template-columns: 1fr; padding-top: 5.5rem; gap: 2.5rem; }
+    .hero-image-wrap { order: -1; }
+    .hero-img-frame { width: min(300px, 75%); }
+    .hero-badge { left: 0; }
+    .hero-badge2 { right: 0; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+    .stat-card { border-right: none; border-bottom: 1px solid var(--border); }
+    .services-grid { grid-template-columns: 1fr; }
+    nav .nav-links, nav .nav-cta { display: none; }
+    .hamburger { display: flex; }
+  }
+  @media (max-width: 500px) {
+    .courses-grid { grid-template-columns: 1fr; }
+    .connect-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">MEO<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+  <a href="https://wa.me/2348129362224" class="nav-cta" target="_blank">Work With Me</a>
+  <div class="hamburger" onclick="toggleMenu(this)">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">✦ Designer &amp; AI Creator</div>
+    <h1 class="hero-name">
+      <span class="glitch" data-text="Miracle">Miracle</span><br>
+      <span class="glitch" data-text="Edet Okon">Edet Okon</span>
+    </h1>
+    <p class="hero-tagline">
+      I help brands &amp; entrepreneurs create <strong>lasting impressions</strong> that attract their audience and generate massive sales — through design and AI.
+    </p>
+    <p class="hero-interrupt">
+      "I will interrupt your industry using Creative Design as a weapon &amp; turn attention into your territory."
+    </p>
+    <div class="hero-btns">
+      <a href="#courses" class="btn-primary">View My Courses</a>
+      <a href="https://wa.me/2348129362224" class="btn-outline" target="_blank">Work With Me →</a>
+    </div>
+    <div class="hero-socials">
+      <span>Follow me</span>
+      <a href="https://www.facebook.com/miracleedet.okon.9" class="social-icon" target="_blank">f</a>
+      <a href="https://www.instagram.com/utk_graphics" class="social-icon" target="_blank">ig</a>
+      <a href="https://x.com/MimiTheDesigner" class="social-icon" target="_blank">𝕏</a>
+    </div>
+  </div>
+
+  <div class="hero-image-wrap">
+    <div class="hero-img-frame">
+      <div class="hero-img-bg"></div>
+      <img src="miracle-hero.jpg" alt="Miracle Edet Okon"
+        onerror="this.style.background='linear-gradient(135deg,#e0f7fa,#fce4ec)';this.style.minHeight='480px';this.style.borderRadius='12px'">
+      <div class="hero-badge">
+        <div class="hero-badge-num" data-count="68">0</div>
+        <div class="hero-badge-label">K Followers</div>
+      </div>
+      <div class="hero-badge2">
+        <div class="hero-badge2-num" data-count="4">0</div>
+        <div class="hero-badge2-label">K+ Posts</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item">✦ <span>Graphic Design</span></div>
+    <div class="ticker-item">✦ <span>AI Video Creation</span></div>
+    <div class="ticker-item">✦ <span>Brand Strategy</span></div>
+    <div class="ticker-item">✦ <span>Digital Education</span></div>
+    <div class="ticker-item">✦ <span>Faceless Content</span></div>
+    <div class="ticker-item">✦ <span>AI Influencers</span></div>
+    <div class="ticker-item">✦ <span>Monetization</span></div>
+    <div class="ticker-item">✦ <span>Smartphone Design</span></div>
+    <div class="ticker-item">✦ <span>Graphic Design</span></div>
+    <div class="ticker-item">✦ <span>AI Video Creation</span></div>
+    <div class="ticker-item">✦ <span>Brand Strategy</span></div>
+    <div class="ticker-item">✦ <span>Digital Education</span></div>
+    <div class="ticker-item">✦ <span>Faceless Content</span></div>
+    <div class="ticker-item">✦ <span>AI Influencers</span></div>
+    <div class="ticker-item">✦ <span>Monetization</span></div>
+    <div class="ticker-item">✦ <span>Smartphone Design</span></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-card reveal">
+      <div class="stat-num cyan" data-count="68">0</div>
+      <div class="stat-label">K Facebook Followers</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num" data-count="4100">0</div>
+      <div class="stat-label">Posts Published</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num mag" data-count="3">0</div>
+      <div class="stat-label">Premium Courses</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-num cyan" data-count="743">0</div>
+      <div class="stat-label">Likes on a Single Post</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap reveal">
+      <div class="about-img-bg"></div>
+      <img src="miracle-hero.jpg" alt="Miracle Edet Okon"
+        onerror="this.style.background='linear-gradient(135deg,#e0f7fa,#fce4ec)';this.style.minHeight='400px';this.style.borderRadius='10px'">
+      <div class="about-tag">Designer · AI Creator</div>
+    </div>
+    <div class="about-text reveal">
+      <div class="section-label">About Miracle</div>
+      <h2 class="section-title">The Creative Who<br><em>Interrupts Industries</em></h2>
+      <p>My name is <strong>Miracle Edet Okon</strong> — a Creative Graphic Designer and AI Creator based in Lagos, Nigeria.</p>
+      <p>I help brands, business owners, and online entrepreneurs create a <strong>lasting impression</strong> that attracts their target audience and generates massive sales — through compelling, efficient, and aesthetic designs.</p>
+      <p>I also teach individuals how to earn by creating stunning, high-demand designs in minutes using nothing but their <strong>smartphone</strong>. I dish out Premium Value for people who are intentional about their growth.</p>
+      <div class="skills-row">
+        <span class="skill-tag">Graphic Design</span>
+        <span class="skill-tag">AI Video Creation</span>
+        <span class="skill-tag">Brand Identity</span>
+        <span class="skill-tag">Faceless Content</span>
+        <span class="skill-tag">Digital Marketing</span>
+        <span class="skill-tag">AI Tools & Workflows</span>
+        <span class="skill-tag">Content Strategy</span>
+        <span class="skill-tag">Smartphone Design</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="reveal">
+    <div class="section-label">What I Do</div>
+    <h2 class="section-title">Three Ways I Can <em>Help You</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🎨</div>
+      <h3 class="service-title">Graphic Design</h3>
+      <p class="service-desc">Compelling, functional, and aesthetic designs that attract your target audience and drive massive sales. From brand identity to promotional materials — every pixel tells your story.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🤖</div>
+      <h3 class="service-title">AI Content Creation</h3>
+      <p class="service-desc">Create viral AI videos, realistic AI influencers, faceless YouTube channels, AI podcasts, and movie scenes. Build and monetize your brand without ever showing your face.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📱</div>
+      <h3 class="service-title">Digital Education</h3>
+      <p class="service-desc">Learn to create stunning designs and viral AI content using only your smartphone. Premium knowledge, practical skills, real income — all from the device already in your hand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="reveal">
+    <div class="section-label">Courses & Masterclasses</div>
+    <h2 class="section-title">Learn From <em>Miracle</em> Directly</h2>
+  </div>
+  <div class="courses-grid">
+
+    <div class="course-card reveal">
+      <div class="course-top-bar"></div>
+      <div class="course-header">
+        <span class="course-tag">🔥 Most Popular</span>
+        <h3 class="course-name">Create Viral AI Videos, Build a Faceless Brand & Monetize Your Content</h3>
+        <span class="course-badge">Hosted on Nestuge · Lifetime Access</span>
+      </div>
+      <div class="course-body">
+        <div class="course-learn-title">What You'll Learn</div>
+        <ul class="course-learn-list">
+          <li>Create realistic AI influencers</li>
+          <li>Create aesthetic AI UGC videos</li>
+          <li>Create AI cartoon & movie scenes</li>
+          <li>Create AI podcast videos</li>
+          <li>Create viral faceless AI content</li>
+          <li>Monetize AI with powerful workflows</li>
+        </ul>
+      </div>
+      <div class="course-footer">
+        <div class="course-price">₦25,000 <span>$20 USD · Bonus: YouTube Automation</span></div>
+        <a href="https://nestuge.com/createviralaivideos" class="course-btn" target="_blank">Enroll Now</a>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-top-bar"></div>
+      <div class="course-header">
+        <span class="course-tag">📱 Smartphone Only</span>
+        <h3 class="course-name">Learn & Master Graphic Design With Your Phone</h3>
+        <span class="course-badge">On Selar · Was ₦40,000</span>
+      </div>
+      <div class="course-body">
+        <div class="course-learn-title">What You'll Learn</div>
+        <ul class="course-learn-list">
+          <li>Create professional flyer designs on phone</li>
+          <li>Choose the right colour for any project</li>
+          <li>Infuse AI into your design for speed</li>
+          <li>Build a brand online from scratch</li>
+          <li>Sales, marketing & pricing for profit</li>
+        </ul>
+      </div>
+      <div class="course-footer">
+        <div class="course-price">₦10,000 <span>Limited Offer · Join via Selar</span></div>
+        <a href="https://selar.com/discountcourse" class="course-btn" target="_blank">Get Course</a>
+      </div>
+    </div>
+
+    <div class="course-card reveal">
+      <div class="course-top-bar"></div>
+      <div class="course-header">
+        <span class="course-tag">🎯 For Creatives</span>
+        <h3 class="course-name">Sales & Marketing Masterclass for Creatives</h3>
+        <span class="course-badge">2 Hours Live · On Selar</span>
+      </div>
+      <div class="course-body">
+        <div class="course-learn-title">What You'll Learn</div>
+        <ul class="course-learn-list">
+          <li>Get consistent clients as a creative</li>
+          <li>Brand yourself for higher pay</li>
+          <li>Marketing strategies that actually work</li>
+          <li>Price your services with confidence</li>
+          <li>Negotiation strategies that close deals</li>
+        </ul>
+      </div>
+      <div class="course-footer">
+        <div class="course-price">₦10,000 <span>Includes scripts, templates & bonus</span></div>
+        <a href="https://selar.com/sxz1u167k1" class="course-btn" target="_blank">Get Course</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section id="connect">
+  <div class="reveal">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Find Me <em>Everywhere</em></h2>
+  </div>
+  <div class="connect-grid">
+    <a href="https://www.facebook.com/miracleedet.okon.9" class="connect-card reveal" target="_blank">
+      <div class="connect-icon" style="color:#1877f2">f</div>
+      <div class="connect-info">
+        <div class="connect-platform">Facebook</div>
+        <div class="connect-handle">Miracle Edet Okon</div>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/utk_graphics" class="connect-card reveal" target="_blank">
+      <div class="connect-icon" style="color:#e1306c">ig</div>
+      <div class="connect-info">
+        <div class="connect-platform">Instagram</div>
+        <div class="connect-handle">@utk_graphics</div>
+      </div>
+    </a>
+    <a href="https://x.com/MimiTheDesigner" class="connect-card reveal" target="_blank">
+      <div class="connect-icon" style="color:#0A0A0A">𝕏</div>
+      <div class="connect-info">
+        <div class="connect-platform">Twitter / X</div>
+        <div class="connect-handle">@MimiTheDesigner</div>
+      </div>
+    </a>
+    <a href="https://wa.me/2348129362224" class="connect-card reveal" target="_blank">
+      <div class="connect-icon" style="color:#25D366">wa</div>
+      <div class="connect-info">
+        <div class="connect-platform">WhatsApp</div>
+        <div class="connect-handle">+234 812 936 2224</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <h2 class="cta-title">Ready to <em>Interrupt</em><br>Your Industry?</h2>
+  <p class="cta-sub">Let's work together. Send a DM and let's build something remarkable.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/2348129362224" class="btn-wa" target="_blank">💬 Message on WhatsApp</a>
+    <a href="#courses" class="btn-white">Browse Courses</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Miracle Edet Okon<span>.</span></div>
+  <div class="footer-text">© 2026 · Designer & AI Creator · Lagos, Nigeria</div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#courses">Courses</a>
+    <a href="#connect">Connect</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 90);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+  // Counter animation
+  function animateCount(el, target) {
+    const duration = 1800;
+    const start = performance.now();
+    const update = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(ease * target).toLocaleString();
+      if (p < 1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  }
+  const cObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCount(e.target, parseInt(e.target.dataset.count));
+        cObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
+
+  // Mobile nav
+  let menuOpen = false;
+  function toggleMenu(btn) {
+    menuOpen = !menuOpen;
+    const links = document.querySelector('.nav-links');
+    const cta = document.querySelector('.nav-cta');
+    if (menuOpen) {
+      links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;background:#fff;padding:1.5rem 5%;gap:1.2rem;border-bottom:1px solid #e5e9f0;box-shadow:0 8px 30px rgba(0,0,0,0.1);z-index:99';
+      cta.style.display = 'block';
+      cta.style.cssText = 'display:block;margin:0 5% 1rem;text-align:center;position:fixed;top:210px;left:0;right:0;z-index:99;background:#E91E8C;color:#fff;padding:0.7rem;border-radius:5px;font-weight:700;text-decoration:none';
+    } else {
+      links.style.cssText = 'display:none';
+      cta.style.cssText = 'display:none';
+    }
+  }
+</script>
+</body>
+</html>
